@@ -47,17 +47,14 @@ while True:
         i+=1
     screen.blit(czcionka.render("Dlugosc: "+str(len(blocks)),1,(200, 200, 200)),(1080, 8))
     if di=="d":
-        del blocks[0]
         blocks.append([blocks[len(blocks)-1][0],blocks[len(blocks)-1][1]+1])
     if di=="u":
-        del blocks[0]
         blocks.append([blocks[len(blocks)-1][0],blocks[len(blocks)-1][1]-1])
     if di=="r":
-        del blocks[0]
         blocks.append([blocks[len(blocks)-1][0]+1, blocks[len(blocks)-1][1]])
     if di=="l":
-        del blocks[0]
         blocks.append([blocks[len(blocks)-1][0]-1, blocks[len(blocks)-1][1]])
+    del blocks[0]
     if blocks[len(blocks)-1][0]<0:
         blocks[len(blocks)-1][0]=119
     elif blocks[len(blocks)-1][0]>120:
