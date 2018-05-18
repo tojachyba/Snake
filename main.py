@@ -31,7 +31,7 @@ while True:
                     di="l"
                 elif di=="l":
                     di="d"
-    fps.tick(20)
+    fps.tick(25)
     screen.fill((50, 50, 50)) 
     i=0
     pygame.draw.circle(screen,(255,0,0),(food[0]*10+5,food[1]*10+5),5)
@@ -42,10 +42,11 @@ while True:
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(blocks[i][0]*10,blocks[i][1]*10, 10, 10))
         if blocks[len(blocks)-1][0]==blocks[i][0] and blocks[len(blocks)-1][1]==blocks[i][1] and i<len(blocks)-1:
             blocks=[[1,1],[1,2]]
+            i = len(blocks)
             food=[random.randint(3,129),random.randint(3,78)]
             di="d"
         i+=1
-    screen.blit(czcionka.render("Dlugosc: "+str(len(blocks)),1,(200, 200, 200)),(1080, 8))
+    screen.blit(czcionka.render("Punkty: "+str(len(blocks)-2),1,(200, 200, 200)),(1080, 8))
     if di=="d":
         blocks.append([blocks[len(blocks)-1][0],blocks[len(blocks)-1][1]+1])
     if di=="u":
@@ -55,12 +56,12 @@ while True:
     if di=="l":
         blocks.append([blocks[len(blocks)-1][0]-1, blocks[len(blocks)-1][1]])
     del blocks[0]
-    if blocks[len(blocks)-1][0]<0:
+    if blocks[len(blocks)-1][0]<=-1:
         blocks[len(blocks)-1][0]=119
-    elif blocks[len(blocks)-1][0]>120:
-        blocks[len(blocks)-1][0]=1
-    if blocks[len(blocks)-1][1]<0:
+    elif blocks[len(blocks)-1][0]>=120:
+        blocks[len(blocks)-1][0]=0
+    if blocks[len(blocks)-1][1]<=-1:
         blocks[len(blocks)-1][1]=79
-    elif blocks[len(blocks)-1][1]>80:
-        blocks[len(blocks)-1][1]=1
+    elif blocks[len(blocks)-1][1]>=80:
+        blocks[len(blocks)-1][1]=0
     pygame.display.flip()
